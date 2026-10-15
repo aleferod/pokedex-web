@@ -1,9 +1,9 @@
 import { Link } from 'react-router';
 
+import { formatKilograms } from '@/shared/format';
+
 import { displayName } from './displayName';
 import type { CatalogEntry } from './types';
-
-const kilograms = new Intl.NumberFormat('en', { maximumFractionDigits: 1 });
 
 /** One catalog entry; the whole card links to the Pokémon's page. */
 export function PokemonCard({ entry }: { entry: CatalogEntry }) {
@@ -33,7 +33,7 @@ export function PokemonCard({ entry }: { entry: CatalogEntry }) {
         <p className="text-sm text-slate-500">#{entry.id}</p>
         <h3 className="text-lg font-semibold">{name}</h3>
         <p className="text-slate-700">{entry.category ?? 'Unknown category'}</p>
-        <p className="text-slate-700">{kilograms.format(entry.weight)} kg</p>
+        <p className="text-slate-700">{formatKilograms(entry.weight)}</p>
         <ul aria-label="Abilities" className="mt-auto flex flex-wrap gap-1 pt-2">
           {entry.abilities.map((ability) => (
             <li key={ability} className="rounded bg-slate-100 px-2 py-0.5 text-sm text-slate-700">
