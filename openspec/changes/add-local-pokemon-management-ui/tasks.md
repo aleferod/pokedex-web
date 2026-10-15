@@ -35,7 +35,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 5. Create and edit
 
-- [ ] 5.1 Write `LocalFormPages.test.tsx` with MSW (D3, D4, D9):
+- [x] 5.1 Write `LocalFormPages.test.tsx` with MSW (D3, D4, D9):
   - create: 201, 409 on the number, 400 field errors including a localized name, rules before sending
   - edit: prefill, PUT body and `If-Match`, the loaded version kept, 409 and "Load the latest version"
   - Verify: red against stubs.
