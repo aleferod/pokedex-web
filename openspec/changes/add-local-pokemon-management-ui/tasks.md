@@ -21,7 +21,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
   - sync one: 201 and 200 messages, invalid identifier, 404, 503
   - sync N: summary and list refresh
   - Verify: red against stubs.
-- [ ] 3.2 Implement `types.ts`, `api.ts`, the list and sync hooks, `LocalListPage`, `LocalRecordCard`, `LocalFilters`, `SyncPanel` and the flash message. Verify: 3.1 green; all gates green.
+- [x] 3.2 Implement `types.ts`, `api.ts`, the list and sync hooks, `LocalListPage`, `LocalRecordCard`, `LocalFilters`, `SyncPanel` and the flash message. Verify: 3.1 green; all gates green.
 
 ## 4. A record's page
 

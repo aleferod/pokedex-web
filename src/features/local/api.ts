@@ -1,0 +1,45 @@
+import { apiRequest, apiResponse, type Page } from '@/shared/api';
+
+import type { LocalListParams } from './localParams';
+import type { BulkSyncResult, LocalPokemon } from './types';
+
+const BASE = '/local-pokemon';
+
+/** One page of the local records; `page` is 1-based here and 0-based in the API. */
+export function fetchLocalPage(
+  { page, size, name, tag }: LocalListParams,
+  signal?: AbortSignal,
+): Promise<Page<LocalPokemon>> {
+  const query = new URLSearchParams({ page: String(page - 1), size: String(size) });
+  if (name !== '') {
+    query.set('name', name);
+  }
+  if (tag !== '') {
+    query.set('tag', tag);
+  }
+  return apiRequest<Page<LocalPokemon>>(`${BASE}?${query.toString()}`, signal ? { signal } : {});
+}
+
+export function fetchLocalRecord(id: string, signal?: AbortSignal): Promise<LocalPokemon> {
+  return apiRequest<LocalPokemon>(`${BASE}/${encodeURIComponent(id)}`, signal ? { signal } : {});
+}
+
+/** Imports a Pokémon (201, `imported`) or refreshes its PokeAPI data (200). */
+export async function syncOne(
+  identifier: string,
+): Promise<{ record: LocalPokemon; imported: boolean }> {
+  const { status, body } = await apiResponse<LocalPokemon>(
+    `${BASE}/sync/${encodeURIComponent(identifier)}`,
+    { method: 'POST' },
+  );
+  return { record: body, imported: status === 201 };
+}
+
+export function syncFirst(limit: number): Promise<BulkSyncResult> {
+  return apiRequest<BulkSyncResult>(`${BASE}/sync?limit=${String(limit)}`, { method: 'POST' });
+}
+
+/** The `If-Match` value for the version the user saw: the API's ETag is the version in quotes. */
+export function ifMatch(version: number): Record<string, string> {
+  return { 'If-Match': `"${String(version)}"` };
+}

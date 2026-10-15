@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet, useLocation } from 'react-router';
 
 import { AuthNav } from '@/features/auth';
 import { ErrorBoundary } from '@/shared/ui/ErrorBoundary';
+import { FlashMessage } from '@/shared/ui/FlashMessage';
 import { navLinkClass } from '@/shared/ui/navLinkClass';
 import { SectionNavLink } from '@/shared/ui/SectionNavLink';
 
@@ -58,6 +59,7 @@ export function Layout() {
         tabIndex={-1}
         className="mx-auto w-full max-w-6xl flex-1 px-4 py-6 focus:outline-none"
       >
+        <FlashMessage />
         <ErrorBoundary key={location.pathname}>
           <Outlet />
         </ErrorBoundary>
