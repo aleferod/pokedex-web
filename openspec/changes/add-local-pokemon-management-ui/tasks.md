@@ -43,8 +43,8 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 6. Verification
 
-- [ ] 6.1 Run every gate in Docker from a clean checkout. Verify: all pass; record coverage.
-- [ ] 6.2 Against the real pokedex-api (with its demo data) and the dev server, in a real browser:
+- [x] 6.1 Run every gate in Docker from a clean checkout. Verify: all pass; record coverage.
+- [x] 6.2 Against the real pokedex-api (with its demo data) and the dev server, in a real browser:
   - as `trainer`: the list, filters and a tag chip; sync one (import, then re-sync); sync 5
   - add with every field, edit, tags in place
   - a conflict from a second tab; no "Delete"
@@ -52,7 +52,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
   - as a visitor: redirect to sign in and back
   - 360 px, keyboard, the console
   - Verify: as in the spec; no app console output.
-- [ ] 6.3 Update the README (My Pokédex, sync, concurrency, roles). Run `openspec validate add-local-pokemon-management-ui --strict` and gitleaks. Verify: valid, no leaks.
+- [x] 6.3 Update the README (My Pokédex, sync, concurrency, roles). Run `openspec validate add-local-pokemon-management-ui --strict` and gitleaks. Verify: valid, no leaks.
 
 - [x] 6.4 Found in 6.2: signing out of `/local` landed on sign-in (D15). Write a test that signs out of `/local` outside `act()`, as a browser schedules it. Verify: red (3 of 3 runs end at `/login`).
 - [x] 6.5 Navigate home with `flushSync` before signing out, and render tests with the DOM `RouterProvider`. Verify: 6.4 green; all gates green; checked again in the browser.
