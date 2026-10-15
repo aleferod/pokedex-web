@@ -15,7 +15,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 3. List and sync
 
-- [ ] 3.1 Write `LocalListPage.test.tsx` with MSW (D2, D5, D6, D11, D13):
+- [x] 3.1 Write `LocalListPage.test.tsx` with MSW (D2, D5, D6, D11, D13):
   - rows, paging, filters and their request, tag chips, clear
   - both empty states, errors
   - sync one: 201 and 200 messages, invalid identifier, 404, 503

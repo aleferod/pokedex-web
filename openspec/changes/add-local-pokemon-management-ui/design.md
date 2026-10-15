@@ -126,7 +126,10 @@ A "Sync from PokeAPI" panel on the list page holds two forms.
   - a 403 (a role changed meanwhile) says that only administrators can delete records
 
 ### D11. Messages across navigation
-A navigation can carry `state: { flash }`. The destination shows the message in a `role="status"` region, copies it into component state, and replaces the history entry without it, so a reload or Back doesn't repeat it.
+- **Carrying the message:** a navigation can carry `state: { flash }`, for example after a sync, a create or a delete.
+- **Where it shows:** the layout (`shared/ui/FlashMessage`), above every page, so a message reaches pages built in other tasks.
+  - The region is a persistent `aria-live="polite"` area, so screen readers hear the message when it appears. It deliberately isn't `role="status"`: pages keep their own status messages, such as "Loading Pokémon…".
+- **Showing it once:** the message is copied into the layout's state for that address, adjusted during render as React recommends for derived state, and the history entry is replaced without it. It disappears on the next navigation, and a reload or Back doesn't repeat it.
 
 ### D12. Navigation
 `shared/ui/SectionNavLink` wraps `NavLink`:
