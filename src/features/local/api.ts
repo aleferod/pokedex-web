@@ -43,3 +43,28 @@ export function syncFirst(limit: number): Promise<BulkSyncResult> {
 export function ifMatch(version: number): Record<string, string> {
   return { 'If-Match': `"${String(version)}"` };
 }
+
+type ProprietaryPatch = Partial<
+  Pick<LocalPokemon, 'localizedNames' | 'region' | 'habitatNotes' | 'internalTags' | 'notes'>
+>;
+
+/** JSON Merge Patch of proprietary fields, for the version the user saw. */
+export function patchRecord(
+  id: string,
+  version: number,
+  patch: ProprietaryPatch,
+): Promise<LocalPokemon> {
+  return apiRequest<LocalPokemon>(`${BASE}/${encodeURIComponent(id)}`, {
+    method: 'PATCH',
+    body: patch,
+    headers: ifMatch(version),
+  });
+}
+
+/** Administrators only; the API checks the version too. */
+export function deleteRecord(id: string, version: number): Promise<void> {
+  return apiRequest<undefined>(`${BASE}/${encodeURIComponent(id)}`, {
+    method: 'DELETE',
+    headers: ifMatch(version),
+  });
+}

@@ -163,7 +163,12 @@ describe('tags in place', () => {
     expect(patch?.body).toEqual({ internalTags: ['electric'] });
 
     release();
-    await user.click(await screen.findByRole('button', { name: 'Remove tag electric' }));
+    // The tag controls wait for the change in flight (one version at a time).
+    const next = screen.getByRole('button', { name: 'Remove tag electric' });
+    await waitFor(() => {
+      expect(next).toBeEnabled();
+    });
+    await user.click(next);
 
     await waitFor(() => {
       expect(api.writes()).toHaveLength(2);

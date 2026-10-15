@@ -31,7 +31,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
   - delete for `ADMIN`: confirmation, `If-Match`, message; not offered to `USER`
   - 404
   - Verify: red against stubs.
-- [ ] 4.2 Implement `LocalRecordPage`, `TagEditor`, `DeleteRecord` and their mutations. Verify: 4.1 green; all gates green.
+- [x] 4.2 Implement `LocalRecordPage`, `TagEditor`, `DeleteRecord` and their mutations. Verify: 4.1 green; all gates green.
 
 ## 5. Create and edit
 
