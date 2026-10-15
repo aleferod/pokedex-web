@@ -5,7 +5,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 ## 1. Groundwork
 
 - [x] 1.1 Move `Page<T>` to `shared/api` and `showServerErrors` to `shared/ui/form` (with a field mapper), and export `StatsTable` and `TypeBadges` from `features/detail` (D2, D4). Verify: all existing tests green.
-- [ ] 1.2 Write the shell tests for "My Pokédex": the current page on `/local`, the current section on a record, and visitors sent to sign in (D1, D12). Add stub routes. Verify: red on the new assertions.
+- [x] 1.2 Write the shell tests for "My Pokédex": the current page on `/local`, the current section on a record, and visitors sent to sign in (D1, D12). Verify: red on the new assertions.
 - [ ] 1.3 Add `SectionNavLink`, the "My Pokédex" link and the protected routes. Verify: 1.2 green.
 
 ## 2. Rules
