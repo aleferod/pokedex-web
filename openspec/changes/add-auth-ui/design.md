@@ -37,7 +37,8 @@ Tokens are HS256 JWTs valid for one hour, with no refresh token (ADR-0002). Erro
 ### D2. Auth state: a small context, not TanStack Query
 - **What it is:** `AuthProvider` holds `{status, session, notice}` in `useState`, initialised synchronously from storage, so there's no flash of "signed out" on reload.
 - **Actions:** it exposes `signIn(credentials)`, `register(values)` and `signOut(notice?)`.
-- **API client wiring:** it calls `configureApiClient` once, with `getToken` reading a ref (always current) and `onUnauthorized` calling `signOut('expired')`.
+- **API client wiring:** it calls `configureApiClient` in a **layout** effect, with `getToken` reading a ref and `onUnauthorized` calling `signOut('expired')` only when a session exists, so a failed sign-in isn't an "expiry". The tests showed why it has to be a layout effect: React runs effects child-first, so a page's query fired before a plain effect had configured the client, got a 401 and ended a valid session right after a reload.
+- **Sign-out from a protected page:** navigate home first, then end the session. Otherwise `ProtectedRoute` redirects to sign-in, which the tests also caught.
 - **Expiry:** a timer signs out at `expiresAt`, capped at 24 days so it never overflows `setTimeout`.
 - **Sign-out:** clears storage, sets the anonymous state and runs `queryClient.clear()`, so no protected data outlives the session.
 - **Why not TanStack Query:** the session is client state that the API client must read synchronously, and the login call is a mutation. TanStack Query stays for server data.

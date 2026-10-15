@@ -9,7 +9,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 2. Session state and routing
 
-- [ ] 2.1 Write `auth.test.tsx` (D2, D3, D5):
+- [x] 2.1 Write `auth.test.tsx` (D2, D3, D5):
   - `ProtectedRoute` redirect and return
   - restore on reload
   - 401 sends the user back to sign-in with the notice
@@ -17,7 +17,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
   - sign-out clears storage and the query cache
   - header states
   - Verify: red.
-- [ ] 2.2 Implement `api.ts`, `AuthProvider` (with `configureApiClient` wiring), `useAuth`, `ProtectedRoute`, `AuthNav` and `AppProviders`, and wire them into `App` and the test helper. Verify: 2.1 green.
+- [x] 2.2 Implement `api.ts`, `AuthProvider` (with `configureApiClient` wiring), `useAuth`, `ProtectedRoute`, `AuthNav` and `AppProviders`, and wire them into `App` and the test helper. Verify: 2.1 green.
 
 ## 3. Pages
 
