@@ -16,12 +16,24 @@ export function parseSize(value: string | null): number {
   return (PAGE_SIZES as readonly number[]).includes(size) ? size : DEFAULT_SIZE;
 }
 
-/** The search from `?name`: stub. */
+const NAME = /^[a-z0-9-]{3,50}$/;
+
+/**
+ * The search from `?name`, normalised like pokedex-api does (trim, lower case, a hyphen for each
+ * run of spaces). `''` when absent or when the API would reject it, like nonsense in `?page`.
+ */
 export function parseName(value: string | null): string {
-  return value ?? '';
+  if (value === null) {
+    return '';
+  }
+  const normalised = value.trim().toLowerCase().replace(/\s+/g, '-');
+  return NAME.test(normalised) ? normalised : '';
 }
 
-/** The query string for a page and size, leaving defaults out (`/pokemon` is page 1 of 20). */
+/**
+ * The query string for a page, size and search, leaving defaults out (`/pokemon` is page 1 of 20
+ * without a search).
+ */
 export function catalogSearch(page: number, size: number, name = ''): string {
   const params = new URLSearchParams();
   if (page !== 1) {
@@ -31,7 +43,7 @@ export function catalogSearch(page: number, size: number, name = ''): string {
     params.set('size', String(size));
   }
   if (name !== '') {
-    params.set('q', name);
+    params.set('name', name);
   }
   const search = params.toString();
   return search === '' ? '' : `?${search}`;
