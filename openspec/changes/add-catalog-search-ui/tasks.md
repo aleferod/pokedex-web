@@ -10,7 +10,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 ## 2. Search on the catalog
 
 - [x] 2.1 Write the `CatalogPage.test.tsx` search tests and the `PokemonDetailPage.test.tsx` way-back and not-found tests (D2–D5). Update the two "find by name" tests to the new behaviour. Verify: red.
-- [ ] 2.2 Implement the query with a name, the search field (pause, URL sync, Enter), the results header and states, and the way back. Verify: 2.1 green; all gates green.
+- [x] 2.2 Implement the query with a name, the search field (pause, URL sync, Enter), the results header and states, and the way back. Verify: 2.1 green; all gates green.
 
 ## 3. Verification
 

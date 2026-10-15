@@ -95,15 +95,20 @@ function pikachuDetailApi() {
   return requests;
 }
 
-/** The visible result cards' names, once the results have settled. */
-async function resultNames(): Promise<string[]> {
-  const list = await screen.findByRole('list', { name: 'Pokémon' });
+/**
+ * Waits until the result cards are exactly these names and no longer busy: after the URL changes,
+ * the previous results stay on screen until the new ones arrive.
+ */
+async function expectResults(names: string[]): Promise<void> {
   await waitFor(() => {
+    const list = screen.getByRole('list', { name: 'Pokémon' });
     expect(list).toHaveAttribute('aria-busy', 'false');
+    expect(
+      within(list)
+        .getAllByRole('heading')
+        .map((heading) => heading.textContent),
+    ).toEqual(names);
   });
-  return within(list)
-    .getAllByRole('heading')
-    .map((heading) => heading.textContent);
 }
 
 function searches(requests: { name?: string }[]): string[] {
@@ -301,7 +306,7 @@ describe('catalog page', () => {
     await waitFor(() => {
       expect(router.state.location.search).toBe('?name=pikachu');
     });
-    expect(await resultNames()).toEqual(['Pikachu', 'Pikachu-rock-star']);
+    await expectResults(['Pikachu', 'Pikachu-rock-star']);
     expect(requests).toContainEqual({ page: 0, size: 20, name: 'pikachu' });
     expect(router.state.location.pathname).toBe('/pokemon');
   });
@@ -359,7 +364,7 @@ describe('searching the catalog by name', () => {
     await waitFor(() => {
       expect(router.state.location.search).toBe('?name=pika');
     });
-    expect(await resultNames()).toEqual(['Pikachu', 'Pikachu-rock-star']);
+    await expectResults(['Pikachu', 'Pikachu-rock-star']);
     expect(screen.getByText('2 Pokémon match “pika”')).toBeInTheDocument();
     expect(searches(requests)).toEqual(['pika']);
     expect(requests).toContainEqual({ page: 0, size: 20, name: 'pika' });
@@ -422,15 +427,17 @@ describe('searching the catalog by name', () => {
     await waitFor(() => {
       expect(router.state.location.search).toBe('?size=40&name=saur');
     });
-    expect(requests).toContainEqual({ page: 0, size: 40, name: 'saur' });
-    expect(await resultNames()).toEqual(['Bulbasaur', 'Ivysaur', 'Venusaur']);
+    await waitFor(() => {
+      expect(requests).toContainEqual({ page: 0, size: 40, name: 'saur' });
+    });
+    await expectResults(['Bulbasaur', 'Ivysaur', 'Venusaur']);
   });
 
   it('opens a shared search with the field filled in', async () => {
     const requests = catalogApi();
     renderRoute('/pokemon?name=pika&size=40');
 
-    expect(await resultNames()).toEqual(['Pikachu', 'Pikachu-rock-star']);
+    await expectResults(['Pikachu', 'Pikachu-rock-star']);
     expect(screen.getByLabelText('Find a Pokémon')).toHaveValue('pika');
     expect(requests[0]).toEqual({ page: 0, size: 40, name: 'pika' });
   });
@@ -439,7 +446,7 @@ describe('searching the catalog by name', () => {
     const user = userEvent.setup();
     catalogApi();
     const { router } = renderRoute('/pokemon?name=saur');
-    await resultNames();
+    await expectResults(['Bulbasaur', 'Ivysaur', 'Venusaur']);
 
     await user.click(screen.getByRole('link', { name: 'Clear search' }));
     await screen.findByRole('heading', { name: 'Bulbasaur' });
@@ -448,14 +455,14 @@ describe('searching the catalog by name', () => {
     await waitFor(() => {
       expect(screen.getByLabelText('Find a Pokémon')).toHaveValue('saur');
     });
-    expect(await resultNames()).toEqual(['Bulbasaur', 'Ivysaur', 'Venusaur']);
+    await expectResults(['Bulbasaur', 'Ivysaur', 'Venusaur']);
   });
 
   it('shows the whole catalog again when the field is emptied', async () => {
     const user = userEvent.setup();
     catalogApi();
     const { router } = renderRoute('/pokemon?name=pika');
-    await resultNames();
+    await expectResults(['Pikachu', 'Pikachu-rock-star']);
 
     await user.clear(screen.getByLabelText('Find a Pokémon'));
 
