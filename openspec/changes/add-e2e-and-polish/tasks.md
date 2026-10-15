@@ -4,7 +4,7 @@ The end-to-end journeys are the tests of this change: each is written and run re
 
 ## 1. Full stack
 
-- [ ] 1.1 Add `docker-compose.full.yml` (D1) and the backend placeholders in `.env.example`. Verify: from a fresh clone, `cp .env.example .env && docker compose -f docker-compose.full.yml up --build --wait` brings all three services up healthy; the app answers on 8000; without `.env` Compose names the missing variable.
+- [x] 1.1 Add `docker-compose.full.yml` (D1) and the backend placeholders in `.env.example`. Verify: from a fresh clone, `cp .env.example .env && docker compose -f docker-compose.full.yml up --build --wait` brings all three services up healthy; the app answers on 8000; without `.env` Compose names the missing variable.
 
 ## 2. End-to-end tooling
 
