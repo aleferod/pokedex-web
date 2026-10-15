@@ -4,38 +4,9 @@ import { delay, http, HttpResponse } from 'msw';
 import { describe, expect, it } from 'vitest';
 
 import { problemResponse } from '@/test/authApi';
+import { ARTWORK, pokemonDetail, stage } from '@/test/pokemonDetails';
 import { renderRoute } from '@/test/renderRoute';
 import { server } from '@/test/server';
-
-interface Stage {
-  id: number;
-  name: string;
-  condition: string | null;
-  evolvesTo: Stage[];
-}
-
-function stage(id: number, name: string, condition: string | null, evolvesTo: Stage[] = []) {
-  return { id, name, condition, evolvesTo };
-}
-
-const ARTWORK = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other';
-
-function detail(id: number, name: string, evolutionChain: Stage, overrides: object = {}) {
-  return {
-    id,
-    name,
-    imageUrl: `${ARTWORK}/official-artwork/${String(id)}.png`,
-    category: 'Seed Pokémon',
-    description: 'A strange seed was planted on its back at birth.',
-    types: ['grass', 'poison'],
-    height: 0.7,
-    weight: 6.9,
-    abilities: ['overgrow', 'chlorophyll'],
-    stats: { hp: 45, attack: 49, defense: 49, specialAttack: 65, specialDefense: 65, speed: 45 },
-    evolutionChain,
-    ...overrides,
-  };
-}
 
 const BULBASAUR_CHAIN = stage(1, 'bulbasaur', null, [
   stage(2, 'ivysaur', 'Level 16', [stage(3, 'venusaur', 'Level 32')]),
@@ -55,16 +26,16 @@ const EEVEE_CHAIN = stage(133, 'eevee', null, [
 ]);
 
 const POKEMON = [
-  detail(1, 'bulbasaur', BULBASAUR_CHAIN),
-  detail(2, 'ivysaur', BULBASAUR_CHAIN, {
+  pokemonDetail(1, 'bulbasaur', BULBASAUR_CHAIN),
+  pokemonDetail(2, 'ivysaur', BULBASAUR_CHAIN, {
     description: 'When the bulb on its back grows large, it appears to lose the ability to stand.',
     height: 1,
     weight: 13,
   }),
-  detail(25, 'pikachu', PIKACHU_CHAIN, { category: 'Mouse Pokémon', types: ['electric'] }),
-  detail(133, 'eevee', EEVEE_CHAIN, { category: 'Evolution Pokémon', types: ['normal'] }),
-  detail(132, 'ditto', stage(132, 'ditto', null), { types: ['normal'] }),
-  detail(10001, 'deoxys-attack', stage(10001, 'deoxys-attack', null), {
+  pokemonDetail(25, 'pikachu', PIKACHU_CHAIN, { category: 'Mouse Pokémon', types: ['electric'] }),
+  pokemonDetail(133, 'eevee', EEVEE_CHAIN, { category: 'Evolution Pokémon', types: ['normal'] }),
+  pokemonDetail(132, 'ditto', stage(132, 'ditto', null), { types: ['normal'] }),
+  pokemonDetail(10001, 'deoxys-attack', stage(10001, 'deoxys-attack', null), {
     imageUrl: null,
     category: null,
     description: null,
