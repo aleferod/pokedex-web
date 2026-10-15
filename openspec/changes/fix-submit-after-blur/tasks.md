@@ -10,7 +10,7 @@
 
 ## 3. Verification
 
-- [ ] 3.1 Check it by hand in a real browser on the edit and registration forms. Run `openspec validate fix-submit-after-blur --strict` and gitleaks. Verify: one click submits and focuses the first problem; valid; no leaks.
+- [x] 3.1 Check it by hand in a real browser on the edit and registration forms. Run `openspec validate fix-submit-after-blur --strict` and gitleaks. Verify: one click submits and focuses the first problem; valid; no leaks.
 
 ## Workflow follow-up
 
