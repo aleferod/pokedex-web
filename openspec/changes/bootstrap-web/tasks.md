@@ -23,9 +23,9 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 5. Verification
 
-- [ ] 5.1 Run `npm ci`, `lint`, `format:check`, `typecheck`, `test:coverage` and `build` in Docker from a clean checkout. Verify: all pass; record the coverage numbers.
-- [ ] 5.2 Open the dev server and the production image in a real browser; tab through, open a deep link and a 404, and read the console. Verify: zero console warnings or errors, and no favicon 404.
-- [ ] 5.3 Run `openspec validate bootstrap-web --strict` and gitleaks. Verify: valid, no leaks.
+- [x] 5.1 Run `npm ci`, `lint`, `format:check`, `typecheck`, `test:coverage` and `build` in Docker from a clean checkout. Verify: all pass; record the coverage numbers.
+- [x] 5.2 Open the dev server and the production image in a real browser; tab through, open a deep link and a 404, and read the console. Verify: zero console warnings or errors, and no favicon 404.
+- [x] 5.3 Run `openspec validate bootstrap-web --strict` and gitleaks. Verify: valid, no leaks.
 
 ## Workflow follow-up
 
