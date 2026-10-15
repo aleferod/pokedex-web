@@ -21,8 +21,8 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 3. Pages
 
-- [ ] 3.1 Write `LoginPage.test.tsx` and `RegisterPage.test.tsx` (D4). Verify: red.
-- [ ] 3.2 Implement the shared form components, `LoginPage`, `RegisterPage`, and the `/login` and `/register` routes. Verify: 3.1 green; lint, type-check and coverage gate green.
+- [x] 3.1 Write `LoginPage.test.tsx` and `RegisterPage.test.tsx` (D4). Verify: red.
+- [x] 3.2 Implement the shared form components, `LoginPage`, `RegisterPage`, and the `/login` and `/register` routes. Verify: 3.1 green; lint, type-check and coverage gate green.
 
 ## 4. Verification
 
