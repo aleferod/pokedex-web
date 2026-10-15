@@ -7,7 +7,6 @@ describe('console guard', () => {
   it('records the React warning for a list without keys, so the test would fail', () => {
     const items = ['bulbasaur', 'ivysaur'];
 
-    // eslint-disable-next-line react/jsx-key -- deliberately missing keys to trigger the warning
     render(
       <ul>
         {items.map((item) => (

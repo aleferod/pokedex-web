@@ -4,7 +4,7 @@ import { HomePage } from './HomePage';
 import { Layout } from './Layout';
 import { NotFoundPage } from './NotFoundPage';
 
-/** The route tree (stub). */
+/** The route tree: every page renders inside the layout; unknown paths get the not-found page. */
 export const routes: RouteObject[] = [
   {
     path: '/',

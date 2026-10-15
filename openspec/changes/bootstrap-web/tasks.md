@@ -13,8 +13,8 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 3. App shell
 
-- [ ] 3.1 Write tests for the layout (skip link first in tab order and focusing `main`, landmarks, nav labelled "Main"), home title, the not-found route (text, home link, title), the error boundary (fallback, "Try again" recovers, layout kept), and a guard test that a React key warning fails a test (D5). Verify: red against stubs.
-- [ ] 3.2 Implement `App`, router, `Layout`, `HomePage`, `NotFoundPage`, `ErrorBoundary`, `useDocumentTitle`, Tailwind base styles with visible focus, and the favicon. Verify: 3.1 green; coverage gate met.
+- [x] 3.1 Write tests for the layout (skip link first in tab order and focusing `main`, landmarks, nav labelled "Main"), home title, the not-found route (text, home link, title), the error boundary (fallback, "Try again" recovers, layout kept), and a guard test that a React key warning fails a test (D5). Verify: red against stubs.
+- [x] 3.2 Implement `App`, router, `Layout`, `HomePage`, `NotFoundPage`, `ErrorBoundary`, `useDocumentTitle`, Tailwind base styles with visible focus, and the favicon. Verify: 3.1 green; coverage gate met.
 
 ## 4. Delivery and CI
 
