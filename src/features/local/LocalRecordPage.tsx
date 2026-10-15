@@ -12,6 +12,7 @@ import { QueryError } from '@/shared/ui/QueryError';
 import { queryErrorMessage } from '@/shared/ui/queryErrorMessage';
 
 import { DeleteRecord } from './DeleteRecord';
+import { RecordNotFound } from './RecordNotFound';
 import { TagEditor } from './TagEditor';
 import type { LocalPokemon } from './types';
 import { useLocalRecord, useSyncOne } from './useLocal';
@@ -46,17 +47,7 @@ export function LocalRecordPage() {
   }
   if (query.isError) {
     return notFound ? (
-      <section aria-labelledby="record-missing" className="space-y-4">
-        <h1 id="record-missing" className="text-2xl font-bold">
-          Record not found
-        </h1>
-        <p className="text-slate-700">
-          This record isn’t in your local Pokédex. It may have been deleted.
-        </p>
-        <Link to="/local" className={backLink}>
-          Back to My Pokédex
-        </Link>
-      </section>
+      <RecordNotFound />
     ) : (
       <QueryError
         title="Couldn’t load this record"

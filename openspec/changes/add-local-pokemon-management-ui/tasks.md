@@ -39,7 +39,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
   - create: 201, 409 on the number, 400 field errors including a localized name, rules before sending
   - edit: prefill, PUT body and `If-Match`, the loaded version kept, 409 and "Load the latest version"
   - Verify: red against stubs.
-- [ ] 5.2 Implement `ProprietaryFields` (with the localized-name rows), `LocalCreatePage` and `LocalEditPage`. Verify: 5.1 green; all gates green.
+- [x] 5.2 Implement `ProprietaryFields` (with the localized-name rows), `LocalCreatePage` and `LocalEditPage`. Verify: 5.1 green; all gates green.
 
 ## 6. Verification
 

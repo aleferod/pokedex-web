@@ -179,8 +179,18 @@ export const createSchema = proprietaryFields
     ...proprietaryBody(values),
   }));
 
-export type CreateFormValues = z.input<typeof createSchema>;
 export type CreateBody = z.output<typeof createSchema>;
+
+/** What both record forms hold: the Pokédex number (sent only when creating) and the fields. */
+export type RecordFormValues = z.input<typeof createSchema>;
+
+/** The edit form: the same values as the create form; the number is shown, not sent. */
+export const editSchema = proprietaryFields
+  .extend({ pokeapiId: z.string() })
+  .check((ctx) => {
+    report(ctx, proprietaryIssues(ctx.value));
+  })
+  .transform(proprietaryBody);
 
 export const EMPTY_PROPRIETARY: ProprietaryFormValues = {
   region: '',

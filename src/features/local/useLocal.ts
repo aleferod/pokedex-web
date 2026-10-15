@@ -3,14 +3,17 @@ import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tansta
 import { ApiError } from '@/shared/api';
 
 import {
+  createRecord,
   deleteRecord,
   fetchLocalPage,
   fetchLocalRecord,
   patchRecord,
+  replaceRecord,
   syncFirst,
   syncOne,
 } from './api';
 import type { LocalListParams } from './localParams';
+import type { ProprietaryBody } from './rules';
 import type { LocalPokemon } from './types';
 
 export const localKeys = {
@@ -106,5 +109,19 @@ export function useDeleteRecord(id: string) {
         void queryClient.invalidateQueries({ queryKey: localKeys.record(id) });
       }
     },
+  });
+}
+
+export function useCreateRecord() {
+  const store = useStoreRecord();
+  return useMutation({ mutationFn: createRecord, onSuccess: store });
+}
+
+export function useReplaceRecord(id: string) {
+  const store = useStoreRecord();
+  return useMutation({
+    mutationFn: ({ version, body }: { version: number; body: ProprietaryBody }) =>
+      replaceRecord(id, version, body),
+    onSuccess: store,
   });
 }

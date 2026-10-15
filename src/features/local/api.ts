@@ -1,6 +1,7 @@
 import { apiRequest, apiResponse, type Page } from '@/shared/api';
 
 import type { LocalListParams } from './localParams';
+import type { CreateBody, ProprietaryBody } from './rules';
 import type { BulkSyncResult, LocalPokemon } from './types';
 
 const BASE = '/local-pokemon';
@@ -65,6 +66,24 @@ export function patchRecord(
 export function deleteRecord(id: string, version: number): Promise<void> {
   return apiRequest<undefined>(`${BASE}/${encodeURIComponent(id)}`, {
     method: 'DELETE',
+    headers: ifMatch(version),
+  });
+}
+
+/** Stores a Pokémon by number with its proprietary fields (201). */
+export function createRecord(body: CreateBody): Promise<LocalPokemon> {
+  return apiRequest<LocalPokemon>(BASE, { method: 'POST', body });
+}
+
+/** Replaces every proprietary field, for the version the form loaded. */
+export function replaceRecord(
+  id: string,
+  version: number,
+  body: ProprietaryBody,
+): Promise<LocalPokemon> {
+  return apiRequest<LocalPokemon>(`${BASE}/${encodeURIComponent(id)}`, {
+    method: 'PUT',
+    body,
     headers: ifMatch(version),
   });
 }
