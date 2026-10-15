@@ -2,7 +2,7 @@
 
 ## 1. Tests first
 
-- [ ] 1.1 Write `SubmitButton.test.tsx` and `e2e/forms.e2e.ts` (D2). Verify: the unit test is red, and the end-to-end test is red against the current stack, with focus left on the button.
+- [x] 1.1 Write `SubmitButton.test.tsx` and `e2e/forms.e2e.ts` (D2). Verify: the unit test is red, and the end-to-end test is red against the current stack, with focus left on the button.
 
 ## 2. Fix
 
