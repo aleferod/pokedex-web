@@ -9,7 +9,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 2. Detail page
 
-- [ ] 2.1 Write `PokemonDetailPage.test.tsx` with MSW (D1–D6):
+- [x] 2.1 Write `PokemonDetailPage.test.tsx` with MSW (D1–D6):
   - contents and the stats table
   - missing artwork, category and description
   - a linear chain with conditions, links and the current stage
