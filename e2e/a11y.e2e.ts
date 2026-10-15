@@ -67,7 +67,8 @@ test.describe('accessibility (axe, WCAG 2.1 A and AA)', () => {
     await signIn(page, ADMIN);
 
     await page.goto('/local');
-    await expect(page.getByText('10 records')).toBeVisible();
+    // Not a record count: local.e2e.ts syncs and deletes Eevee in another worker meanwhile.
+    await expect(page.getByRole('link', { name: 'Pikachu' })).toBeVisible();
     await expectAccessible(page, 'My Pokédex');
 
     await page.getByRole('link', { name: 'Pikachu' }).click();
