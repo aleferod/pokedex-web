@@ -32,7 +32,7 @@ The API answers `GET /api/v1/pokemon?page=<0-based>&size=<1..100>` with `{conten
 - **Results:** a heading ("Pokémon", focusable with `tabIndex=-1`, focused after a page change), then a `ul` of cards (`li` > `article`).
 - **Cards:**
   - the sprite `img`, 96×96, with `loading="lazy"` and `alt` = the capitalised name
-  - the number formatted as `#025` and the name as a heading
+  - the number as `#1` (as the spec's scenario says) and the name as a heading
   - the category, or "Unknown category"
   - the weight via `Intl.NumberFormat('en', { maximumFractionDigits: 1 })` plus " kg"
   - the abilities as a list
