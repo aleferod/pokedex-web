@@ -93,7 +93,9 @@ export function localApi(initial: LocalPokemon[] = [], options: { user?: string 
   const records = new Map(initial.map((record) => [record.id, structuredClone(record)]));
   const requests: RecordedRequest[] = [];
   const user = options.user ?? 'trainer';
+  let held: Promise<void> | null = null;
 
+  /** Records the request; a write then waits while `hold()` is on. */
   async function remember(request: Request): Promise<void> {
     const url = new URL(request.url);
     const text = await request.clone().text();
@@ -104,6 +106,9 @@ export function localApi(initial: LocalPokemon[] = [], options: { user?: string 
       ifMatch: request.headers.get('If-Match'),
       body: text === '' ? undefined : (JSON.parse(text) as unknown),
     });
+    if (held !== null && request.method !== 'GET') {
+      await held;
+    }
   }
 
   function find(id: string) {
@@ -295,6 +300,19 @@ export function localApi(initial: LocalPokemon[] = [], options: { user?: string 
     records,
     /** Requests other than reads, in order. */
     writes: () => requests.filter((r) => r.method !== 'GET'),
+    /** Writes wait (reads don't) until the returned function is called. */
+    hold(): () => void {
+      let release: () => void = () => {
+        // Replaced by the promise's resolve below.
+      };
+      held = new Promise<void>((resolve) => {
+        release = resolve;
+      });
+      return () => {
+        held = null;
+        release();
+      };
+    },
     /** Someone else saves the record: its version moves on and `changes` apply. */
     changeElsewhere(id: string, changes: Partial<LocalPokemon> = {}) {
       const record = find(id);

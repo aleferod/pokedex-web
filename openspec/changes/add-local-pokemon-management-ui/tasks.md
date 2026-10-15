@@ -25,7 +25,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 4. A record's page
 
-- [ ] 4.1 Write `LocalRecordPage.test.tsx` with MSW (D7, D8, D10):
+- [x] 4.1 Write `LocalRecordPage.test.tsx` with MSW (D7, D8, D10):
   - the read-only and proprietary sections, audit, re-sync
   - optimistic tag add and remove: body, `If-Match`, rollback on 409 and on 400
   - delete for `ADMIN`: confirmation, `If-Match`, message; not offered to `USER`
