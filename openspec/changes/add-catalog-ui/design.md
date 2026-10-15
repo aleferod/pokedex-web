@@ -25,7 +25,7 @@ The API answers `GET /api/v1/pokemon?page=<0-based>&size=<1..100>` with `{conten
 
 ### D2. Data
 - **Query:** `useCatalogPage(page, size)` with the key `['catalog', page, size]` and `placeholderData: keepPreviousData`. While the next page loads, the previous one stays on screen, marked busy, so there's no flash of skeletons.
-- **Prefetch:** `queryClient.prefetchQuery` for the next page once a page has loaded (cheap, and cached server-side).
+- **Prefetch:** `queryClient.query(...)` for the next page once a page has loaded (cheap, and cached server-side), with its errors swallowed. TanStack Query 5.104 deprecates `prefetchQuery` in favour of `query(options)`; the type-aware lint flagged it.
 - **Types:** `CatalogEntry` and `Page<T>` in `features/catalog/types.ts`. `Page<T>` is generic, so it moves to `shared/api` when a second feature needs it.
 
 ### D3. Presentation

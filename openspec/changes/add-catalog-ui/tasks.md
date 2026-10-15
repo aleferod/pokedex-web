@@ -9,7 +9,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 2. Catalog page
 
-- [ ] 2.1 Write `CatalogPage.test.tsx` with MSW (D1–D3, D5, D6):
+- [x] 2.1 Write `CatalogPage.test.tsx` with MSW (D1–D3, D5, D6):
   - first page and cards
   - null sprite and category
   - Next/Previous and the URL
@@ -24,7 +24,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
   - prefetch
   - the finder: by name, by number, invalid
   - Verify: red against stubs.
-- [ ] 2.2 Implement `useCatalogParams`, `useCatalogPage`, `CatalogPage`, `PokemonCard`, `CardSkeleton` and `FindPokemonForm`; add the `/pokemon` route, the "Catalog" link and a home-page call to action. Verify: 2.1 green; lint, type-check and coverage gate green.
+- [x] 2.2 Implement `useCatalogParams`, `useCatalogPage`, `CatalogPage`, `PokemonCard`, `CardSkeleton` and `FindPokemonForm`; add the `/pokemon` route, the "Catalog" link and a home-page call to action. Verify: 2.1 green; lint, type-check and coverage gate green.
 
 ## 3. Verification
 
