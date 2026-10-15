@@ -27,7 +27,8 @@ US02 asks to see everything about one Pokémon: its image, stats, description an
 - `pokemon-detail-ui`: the detail page, its contents, the evolution chain, its states and the way back to the catalog.
 
 ### Modified Capabilities
-- None. Catalog cards keep linking to `/pokemon/:id`; they now also remember the catalog page for the way back.
+- `app-shell`: on a Pokémon's page, the "Catalog" link in the main navigation is marked as the current section, not the current page (found in the browser check, design D9).
+- Catalog cards keep linking to `/pokemon/:id`; they now also remember the catalog page for the way back. The `catalog-ui` requirements are unchanged.
 
 ## Out of Scope
 
@@ -36,6 +37,6 @@ US02 asks to see everything about one Pokémon: its image, stats, description an
 
 ## Impact
 
-- **Code:** `src/features/detail/*`, the route, small exports from `features/catalog` (the identifier rule, the finder, `displayName`), and shared measure formatting (`shared/format`) used by both the cards and the detail page.
+- **Code:** `src/features/detail/*`, the route, the main navigation's "Catalog" link, small exports from `features/catalog` (the identifier rule, the finder, `displayName`), and shared measure formatting (`shared/format`) used by both the cards and the detail page.
 - **Backend:** none.
 - **Dependencies:** none new.

@@ -92,6 +92,11 @@ The web app already has:
 | `catalogReturn.test.ts` | the state a card carries; reading valid, missing, malformed and non-canonical state |
 | `PokemonDetailPage.test.tsx` (MSW) | contents (artwork, number, name, types, category, description, height, weight, abilities, the stats table and total); null artwork, description and category; a linear chain with conditions, links and the current stage; Eevee's 8 branches; Ditto; following the chain (new request, title, focus); canonical address; invalid identifier with no request; 404 by name and by number; 503 with "Try again"; the way back from catalog page 3 and through the chain; the route from a catalog card |
 
+### D9. Current page vs current section (found in the browser check)
+The browser check found two `aria-current="page"` links on a Pokémon's page: the evolution stage being viewed, and the "Catalog" link in the main navigation. React Router's `NavLink` marks a link as the current page on its child routes too. A screen reader then announces "Catalog, current page" on Pikachu's page.
+
+The fix: the "Catalog" link uses `aria-current="page"` only on `/pokemon` itself (`useMatch('/pokemon')`), and `aria-current="true"` on the pages below it, meaning the current item of the navigation. The visual underline stays for both. The `app-shell` "Accessible layout" requirement now says this, and the shell tests cover both cases.
+
 ## Risks / Trade-offs
 
 - [On a 0–255 scale most bars are short] → it's the honest scale, and every value is also shown as a number.

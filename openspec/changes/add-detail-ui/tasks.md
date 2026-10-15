@@ -24,6 +24,9 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
   - Verify: red against stubs.
 - [x] 2.2 Implement `api.ts`, `types.ts`, `usePokemonDetail`, `PokemonDetailPage`, `DetailSkeleton`, `StatsTable`, `TypeBadges`, `EvolutionTree` and `DetailNotFound`. Add the route, the catalog exports and the cards' link state. Verify: 2.1 green; lint, type-check and coverage gate green.
 
+- [x] 2.3 Found in 3.2: on a Pokémon's page the "Catalog" nav link said `aria-current="page"` (D9). Write shell tests for "current page" on `/pokemon` and "current section" on `/pokemon/25`. Verify: red on the second.
+- [ ] 2.4 Mark the "Catalog" link `aria-current="true"` below `/pokemon`. Verify: 2.3 green; all gates green.
+
 ## 3. Verification
 
 - [ ] 3.1 Run every gate in Docker from a clean checkout. Verify: all pass; record coverage.
