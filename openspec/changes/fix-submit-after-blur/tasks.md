@@ -6,7 +6,7 @@
 
 ## 2. Fix
 
-- [ ] 2.1 Cancel `mousedown` in `SubmitButton` (D1). Verify: 1.1 green; all unit gates and the whole end-to-end suite green.
+- [x] 2.1 Cancel `mousedown` in `SubmitButton` (D1). Verify: 1.1 green; all unit gates and the whole end-to-end suite green.
 
 ## 3. Verification
 
