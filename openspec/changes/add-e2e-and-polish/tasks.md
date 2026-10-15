@@ -8,7 +8,7 @@ The end-to-end journeys are the tests of this change: each is written and run re
 
 ## 2. End-to-end tooling
 
-- [ ] 2.1 Add `@playwright/test` 1.63.0 and `@axe-core/playwright` 4.13.0, `playwright.config.ts`, `tsconfig.e2e.json`, the ESLint and Vitest settings, `scripts/e2e.sh` and `npm run test:e2e` (D2, D7). Verify: lint, type-check and the unit suite stay green; `scripts/e2e.sh` with an empty suite starts and removes a stack.
+- [x] 2.1 Add `@playwright/test` 1.63.0 and `@axe-core/playwright` 4.13.0, `playwright.config.ts`, `tsconfig.e2e.json`, the ESLint and Vitest settings, `scripts/e2e.sh` and `npm run test:e2e` (D2, D7). Verify: lint, type-check and the unit suite stay green; `scripts/e2e.sh` with an empty suite starts and removes a stack.
 
 ## 3. Journeys
 
