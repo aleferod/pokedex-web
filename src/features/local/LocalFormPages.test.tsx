@@ -213,6 +213,28 @@ describe('editing a record', () => {
     expect(api.writes()[1]?.ifMatch).toBe('"4"');
   });
 
+  it('puts the API’s tag error on the tags line', async () => {
+    const user = userEvent.setup();
+    localApi([PIKACHU]);
+    server.use(
+      http.put('/api/v1/local-pokemon/:id', () =>
+        problemResponse(400, 'invalid-request', 'The request is invalid.', [
+          { field: 'internalTags', message: 'must have at most 20 tags' },
+        ]),
+      ),
+    );
+    renderRoute(EDIT);
+
+    await user.click(await screen.findByRole('button', { name: 'Save changes' }));
+
+    await waitFor(() => {
+      expect(screen.getByLabelText('Tags')).toHaveAccessibleDescription(
+        expect.stringContaining('Must have at most 20 tags'),
+      );
+    });
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument();
+  });
+
   it('says when the record to edit is not there', async () => {
     localApi([]);
     renderRoute(`/local/${recordId(8999)}/edit`);

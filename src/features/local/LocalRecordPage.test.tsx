@@ -311,6 +311,23 @@ describe('deleting a record', () => {
     expect(api.records.has(PIKACHU.id)).toBe(true);
   });
 
+  it('says only administrators can delete when the API answers 403', async () => {
+    const user = userEvent.setup();
+    await openPikachu('ADMIN');
+    server.use(
+      http.delete('/api/v1/local-pokemon/:id', () =>
+        problemResponse(403, 'forbidden', 'Access is denied.'),
+      ),
+    );
+
+    await user.click(screen.getByRole('button', { name: 'Delete' }));
+    await user.click(screen.getByRole('button', { name: 'Delete Pikachu' }));
+
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      'Only administrators can delete records.',
+    );
+  });
+
   it('returns to the list when the record was already deleted', async () => {
     const user = userEvent.setup();
     const { api, router } = await openPikachu('ADMIN');

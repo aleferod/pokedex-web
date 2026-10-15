@@ -97,6 +97,21 @@ describe('My Pokédex list', () => {
     expect(screen.getByRole('navigation', { name: 'Pagination' })).toHaveTextContent('Page 2 of 2');
   });
 
+  it('changes the page size through the URL, from page 1', async () => {
+    const user = userEvent.setup();
+    const api = localApi([PIKACHU, BULBASAUR]);
+    const { router } = renderRoute('/local?page=2&tag=kanto');
+    await screen.findByRole('search', { name: 'Filter my Pokédex' });
+
+    await user.click(await screen.findByRole('link', { name: 'Go to the last page' }));
+    await user.selectOptions(await screen.findByRole('combobox', { name: 'Per page' }), '40');
+
+    await waitFor(() => {
+      expect(router.state.location.search).toBe('?size=40&tag=kanto');
+    });
+    expect(listQueries(api)).toContain('page=0&size=40&tag=kanto');
+  });
+
   it('filters by name and tag through the URL, from page 1', async () => {
     const user = userEvent.setup();
     const api = localApi([PIKACHU, BULBASAUR, IVYSAUR]);
@@ -215,6 +230,23 @@ describe('Syncing from PokeAPI', () => {
     ]);
   });
 
+  it('shows the message once: not after leaving, not again on Back', async () => {
+    const user = userEvent.setup();
+    localApi([]);
+    const { router } = renderRoute('/local');
+    await screen.findByText('Your local Pokédex is empty.');
+    await user.type(syncPanel().getByLabelText('Name or number'), 'pikachu{Enter}');
+    expect(await screen.findByText('Pikachu was imported from PokeAPI.')).toBeInTheDocument();
+
+    await user.click(screen.getByRole('link', { name: 'Back to My Pokédex' }));
+    expect(await screen.findByRole('link', { name: 'Pikachu' })).toBeInTheDocument();
+    expect(screen.queryByText('Pikachu was imported from PokeAPI.')).not.toBeInTheDocument();
+
+    await router.navigate(-1);
+    expect(await screen.findByRole('heading', { level: 1, name: 'Pikachu' })).toBeInTheDocument();
+    expect(screen.queryByText('Pikachu was imported from PokeAPI.')).not.toBeInTheDocument();
+  });
+
   it('re-syncs a stored Pokémon and says its proprietary fields were kept', async () => {
     const user = userEvent.setup();
     localApi([PIKACHU]);
@@ -298,6 +330,24 @@ describe('Syncing from PokeAPI', () => {
     expect(api.writes()[0]?.search.toString()).toBe('limit=3');
     expect(await screen.findByRole('link', { name: 'Venusaur' })).toBeInTheDocument();
     expect(screen.getByRole('link', { name: 'Bulbasaur' })).toBeInTheDocument();
+  });
+
+  it('says PokeAPI is down when syncing the first entries gets a 503', async () => {
+    const user = userEvent.setup();
+    localApi([]);
+    server.use(
+      http.post('/api/v1/local-pokemon/sync', () =>
+        problemResponse(503, 'service-unavailable', 'PokeAPI is unavailable.'),
+      ),
+    );
+    renderRoute('/local');
+    await screen.findByText('Your local Pokédex is empty.');
+
+    await user.click(syncPanel().getByRole('button', { name: 'Sync from the start' }));
+
+    expect(await syncPanel().findByRole('alert')).toHaveTextContent(
+      'PokeAPI is temporarily unavailable. Please try again in a moment.',
+    );
   });
 
   it('allows from 1 to 20 entries at a time', async () => {
