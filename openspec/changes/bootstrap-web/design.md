@@ -69,7 +69,7 @@
 - **Stages:** `node:24-alpine` runs `npm ci` and `npm run build`. `nginx:alpine` copies `dist/` and a config template.
 - **nginx behaviour:**
   - `location /` uses `try_files $uri /index.html` (SPA fallback)
-  - `location /api/` uses `proxy_pass ${API_UPSTREAM}`, which the official image's envsubst-on-templates fills at start (default `http://api:8080`)
+  - `location /api/` proxies to `${API_UPSTREAM}`, which the official image's envsubst-on-templates fills at start (default `http://api:8080`). The target goes through a variable, with `resolver ${NGINX_LOCAL_RESOLVERS}`, so the host is resolved per request: nginx starts even before the backend exists, and answers 502 until it does.
   - `/assets/*` (hashed) gets `Cache-Control: public, max-age=31536000, immutable`; `index.html` gets `no-cache`
   - `X-Content-Type-Options: nosniff`, `Referrer-Policy: strict-origin-when-cross-origin` and `X-Frame-Options: DENY`
 - **Health check:** `wget` on `/healthz`, a static 200 from nginx.
