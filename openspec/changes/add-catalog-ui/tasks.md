@@ -28,8 +28,8 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 3. Verification
 
-- [ ] 3.1 Run every gate in Docker from a clean checkout. Verify: all pass; record coverage.
-- [ ] 3.2 Against the real pokedex-api and the dev server, in a real browser:
+- [x] 3.1 Run every gate in Docker from a clean checkout. Verify: all pass; record coverage.
+- [x] 3.2 Against the real pokedex-api and the dev server, in a real browser:
   - pages 1 → 2 → back
   - a shared link
   - size 40
@@ -39,7 +39,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
   - keyboard: Tab through cards and pagination
   - the console
   - Verify: as in the spec; no app console output.
-- [ ] 3.3 Update the README (catalog, URL state). Run `openspec validate add-catalog-ui --strict` and gitleaks. Verify: valid, no leaks.
+- [x] 3.3 Update the README (catalog, URL state). Run `openspec validate add-catalog-ui --strict` and gitleaks. Verify: valid, no leaks.
 
 ## Workflow follow-up
 
