@@ -8,8 +8,8 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 2. API client
 
-- [ ] 2.1 Write `client.test.ts` with MSW: base URL and headers, JSON body, 204, problem → `ApiError` (400 field errors grouped, 409 type and detail, correlation id), non-problem 502, network failure, abort passthrough; and `queryClient.test.ts` for the retry policy (D3, D4). Verify: red against stubs.
-- [ ] 2.2 Implement `src/shared/api` (`apiRequest`, `ApiError`, problem types, `configureApiClient` seam) and `src/app/queryClient.ts`. Verify: 2.1 green.
+- [x] 2.1 Write `client.test.ts` with MSW: base URL and headers, JSON body, 204, problem → `ApiError` (400 field errors grouped, 409 type and detail, correlation id), non-problem 502, network failure, abort passthrough; and `queryClient.test.ts` for the retry policy (D3, D4). Verify: red against stubs.
+- [x] 2.2 Implement `src/shared/api` (`apiRequest`, `ApiError`, problem types, `configureApiClient` seam) and `src/app/queryClient.ts`. Verify: 2.1 green.
 
 ## 3. App shell
 
