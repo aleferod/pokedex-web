@@ -10,7 +10,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 2. Rules
 
-- [ ] 2.1 Write `rules.test.ts` (D4): each rule and message, several broken at once, normalisation, code points, duplicate locales, the request body. Verify: red against stubs.
+- [x] 2.1 Write `rules.test.ts` (D4): each rule and message, several broken at once, normalisation, code points, duplicate locales, the request body. Verify: red against stubs.
 - [ ] 2.2 Implement `features/local/rules.ts`. Verify: 2.1 green.
 
 ## 3. List and sync
