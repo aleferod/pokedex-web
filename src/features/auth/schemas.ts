@@ -27,14 +27,10 @@ export const emailSchema = z
 
 /** Every rule the password breaks, in pokedex-api's words and order. */
 export function passwordViolations(password: string): string[] {
-  const characters = [...password];
+  const characters = codePointCount(password);
   const bytes = new TextEncoder().encode(password).length;
   const violations: string[] = [];
-  if (
-    characters.length < PASSWORD_MIN ||
-    characters.length > PASSWORD_MAX ||
-    bytes > PASSWORD_MAX
-  ) {
+  if (characters < PASSWORD_MIN || characters > PASSWORD_MAX || bytes > PASSWORD_MAX) {
     violations.push(`must be ${String(PASSWORD_MIN)} to ${String(PASSWORD_MAX)} characters`);
   }
   if (!/\p{Lu}/u.test(password)) {
@@ -50,6 +46,11 @@ export function passwordViolations(password: string): string[] {
     violations.push('must contain a character that is neither a letter nor a digit');
   }
   return violations;
+}
+
+/** Characters as Java counts them (code points, not UTF-16 units), like the backend's rule. */
+function codePointCount(value: string): number {
+  return Array.from(value).length;
 }
 
 export const passwordSchema = z.string().check((ctx) => {
