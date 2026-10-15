@@ -24,7 +24,7 @@
 | @tanstack/react-query | 5.104 | |
 | vite | 8.3 | with `@vitejs/plugin-react` 6 and `@tailwindcss/vite` 4.3 |
 | typescript | **6.0** | 7.0 is the latest, but typescript-eslint 8.71 supports `<6.1`. Type-aware linting matters more than the native compiler. |
-| eslint | **9.39** (maintenance line) | `eslint-plugin-jsx-a11y` 6.10 declares support only up to ESLint 9, and the accessibility rules matter more than ESLint 10 |
+| eslint | 10.12 | with `eslint-plugin-jsx-a11y-x` 0.2, the maintained fork (es-tooling) of `eslint-plugin-jsx-a11y`. The original declares only ESLint ≤ 9, and npm marks ESLint 9 as no longer supported. |
 | vitest | 5.0 | with jsdom 30, @testing-library/react 16 and MSW 3 |
 | Node | 24 LTS | in Docker (`node:24-alpine`); the host needs only Docker |
 
@@ -59,7 +59,7 @@
 ### D5. Warnings are test failures
 - **Vitest setup:**
   - jest-dom matchers
-  - an MSW server with `onUnhandledRequest: 'error'`
+  - an MSW server with `onUnhandledFrame: 'error'` (MSW 3's name for the unhandled-request strategy)
   - `console.error` and `console.warn` replaced by functions that **throw**, so React's key, act() and prop-type warnings fail the test that caused them
 - **Coverage:** v8, for `src/**` excluding entry and type files. Thresholds: 85 % for lines, statements and functions, and 80 % for branches.
 - **Lint:** `eslint . --max-warnings 0`.
@@ -88,6 +88,7 @@ Vite proxies `/api` to `VITE_DEV_API_TARGET` (default `http://localhost:8080`), 
 
 ## Risks / Trade-offs
 
-- [Two tools one major behind (TypeScript, ESLint)] → recorded here, revisited when typescript-eslint and jsx-a11y catch up.
+- [TypeScript one major behind] → recorded here, revisited when typescript-eslint supports TypeScript 7.
+- [An accessibility plugin fork] → it's young (0.x), but maintained and rule-compatible. The task list checks that its rules fire.
 - [Throwing on any console output in tests] → strict, but it's the only way to keep the "zero console warnings" rule honest. A test that expects an error log must stub `console` explicitly.
 - [nginx proxying the API] → the browser sees one origin, so there's no CORS. The API URL is runtime configuration of the image, not a rebuild.

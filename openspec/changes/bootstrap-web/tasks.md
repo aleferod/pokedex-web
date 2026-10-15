@@ -4,7 +4,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 1. Toolchain
 
-- [ ] 1.1 Add `scripts/npm-in-docker.sh`, `package.json` with pinned versions (D1), TypeScript strict configs, the Vite config (React, Tailwind, `@/` alias, dev proxy), ESLint flat config, Prettier, and Vitest setup (jest-dom, MSW with unhandled = error, console guard, coverage thresholds) (D2, D5, D7). Verify: `npm ci`, lint, type-check and an empty test run work in Docker.
+- [x] 1.1 Add `scripts/npm-in-docker.sh`, `package.json` with pinned versions (D1), TypeScript strict configs, the Vite config (React, Tailwind, `@/` alias, dev proxy), ESLint flat config, Prettier, and Vitest setup (jest-dom, MSW with unhandled = error, console guard, coverage thresholds) (D2, D5, D7). Verify: `npm ci`, lint, type-check and an empty test run work in Docker.
 
 ## 2. API client
 

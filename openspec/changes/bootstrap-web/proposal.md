@@ -29,7 +29,7 @@ It serves no user story directly. It's the auxiliary platform requirement for US
   - Every failure becomes one `ApiError`, carrying status, problem type, title, detail, field errors and the correlation id. Network failures and non-problem error bodies are included.
 - **Query defaults:** don't retry 4xx answers, retry 5xx and network failures once, and keep data fresh for 60 s.
 - **Quality:**
-  - ESLint 9 (typescript-eslint strict type-checked, react-hooks, jsx-a11y, react-refresh), with zero warnings allowed
+  - ESLint 10 (typescript-eslint strict type-checked, react-hooks, jsx-a11y-x, react-refresh), with zero warnings allowed
   - a Prettier check and `tsc --noEmit`
   - Vitest 5 with React Testing Library and MSW 3. Unhandled requests are errors, any `console.error` or `console.warn` fails the test, and there's a coverage gate.
 - **Docker:** a multi-stage image (`node:24-alpine` builds, `nginx:alpine` serves).
@@ -60,4 +60,4 @@ It serves no user story directly. It's the auxiliary platform requirement for US
 
 - **Repository:** first code in `pokedex-web`.
 - **Backend:** none. The SPA calls the API through the same origin (`/api` proxy in nginx and in the Vite dev server), so no CORS changes are needed.
-- **Versions:** see the design (D1). Two are deliberately one major behind the latest: TypeScript and ESLint.
+- **Versions:** see the design (D1). TypeScript is deliberately one major behind the latest.
