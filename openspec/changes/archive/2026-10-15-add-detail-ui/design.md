@@ -95,7 +95,7 @@ The web app already has:
 ### D9. Current page vs current section (found in the browser check)
 The browser check found two `aria-current="page"` links on a Pokémon's page: the evolution stage being viewed, and the "Catalog" link in the main navigation. React Router's `NavLink` marks a link as the current page on its child routes too. A screen reader then announces "Catalog, current page" on Pikachu's page.
 
-The fix: the "Catalog" link uses `aria-current="page"` only on `/pokemon` itself (`useMatch('/pokemon')`), and `aria-current="true"` on the pages below it, meaning the current item of the navigation. The visual underline stays for both. The `app-shell` "Accessible layout" requirement now says this, and the shell tests cover both cases.
+The fix: the "Catalog" link uses `aria-current="page"` only on `/pokemon` itself (`useMatch('/pokemon')`), and `aria-current="true"` on the pages below it, meaning the current item of the navigation. The visual underline stays for both. A new `app-shell` requirement, "Current page in the navigation", says this, and the shell tests cover both cases. (A first draft added the rule to "Accessible layout" instead. That passed the change's own validation but pushed the merged requirement past OpenSpec's 500-character limit, which strict validation of the archived spec caught, so it became a requirement of its own.)
 
 ## Risks / Trade-offs
 
