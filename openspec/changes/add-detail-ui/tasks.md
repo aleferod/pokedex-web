@@ -4,8 +4,8 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 1. Helpers
 
-- [ ] 1.1 Write `shared/format.test.ts` and `features/detail/catalogReturn.test.ts` (D6, D7). Verify: red against stubs.
-- [ ] 1.2 Implement `shared/format.ts` (and move `PokemonCard` to it) and `features/detail/catalogReturn.ts`. Verify: 1.1 green; the catalog tests stay green.
+- [x] 1.1 Write `shared/format.test.ts` and `features/catalog/catalogReturn.test.ts` (D6, D7). Verify: red against stubs.
+- [ ] 1.2 Implement `shared/format.ts` (and move `PokemonCard` to it) and `features/catalog/catalogReturn.ts`. Verify: 1.1 green; the catalog tests stay green.
 
 ## 2. Detail page
 

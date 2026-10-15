@@ -78,17 +78,18 @@ The web app already has:
   - Catalog cards pass `state={{ catalogSearch }}`, the catalog's own `catalogSearch(page, size)`. Evolution links pass the received state on.
   - "Back to the catalog" goes to `/pokemon` plus that search.
   - The detail page accepts only `{ catalogSearch: string }`, then re-reads the value through `parsePage` and `parseSize` and rebuilds it with `catalogSearch`. History state therefore can't produce an odd link.
+  - Both sides live in `features/catalog/catalogReturn.ts`: `catalogReturnState(page, size)` for the cards and `catalogReturnSearch(state)` for the detail page. The catalog writes the state, and detail depends on catalog, not the reverse.
 - **Focus:** when the loaded Pokémon changes and the address was reached inside the app (`location.key !== 'default'`), focus moves to the name. Otherwise, after clicking a chain link, focus would fall back to the document as the link disappears. On a fresh load, the browser's own focus is left alone.
 
 ### D7. Shared pieces
-- `features/catalog/index.ts` also exports `IDENTIFIER_RULE`, `FindPokemonForm`, `displayName` and the catalog search helpers. The dependency runs one way: detail → catalog.
+- `features/catalog/index.ts` also exports `FindPokemonForm`, `displayName` and `catalogReturnSearch`. The dependency runs one way: detail → catalog.
 - `shared/format.ts` has `formatKilograms` (`6.9 kg`) and `formatMetres` (`0.7 m`): one `Intl.NumberFormat('en')` with at most one decimal. `PokemonCard` moves to it.
 
 ### D8. Testing
 | Test | What it covers |
 |---|---|
 | `format.test.ts` | whole numbers, one decimal, rounding, grouping |
-| `catalogReturn.test.ts` | valid state, missing or malformed state, values that get normalised |
+| `catalogReturn.test.ts` | the state a card carries; reading valid, missing, malformed and non-canonical state |
 | `PokemonDetailPage.test.tsx` (MSW) | contents (artwork, number, name, types, category, description, height, weight, abilities, the stats table and total); null artwork, description and category; a linear chain with conditions, links and the current stage; Eevee's 8 branches; Ditto; following the chain (new request, title, focus); canonical address; invalid identifier with no request; 404 by name and by number; 503 with "Try again"; the way back from catalog page 3 and through the chain; the route from a catalog card |
 
 ## Risks / Trade-offs
