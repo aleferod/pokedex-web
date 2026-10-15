@@ -149,6 +149,13 @@ Dates use `Intl.DateTimeFormat('en', { dateStyle: 'medium', timeStyle: 'short' }
 | `LocalRecordPage.test.tsx` (MSW) | the read-only and proprietary sections, audit, re-sync, tags added and removed optimistically (request body and `If-Match`, rollback on 409 and on 400), delete for `ADMIN` (confirmation, `If-Match`, message) and not for `USER`, 404 |
 | `LocalFormPages.test.tsx` (MSW) | create (201, 409 on the number, 400 field errors including a localized name, rules before sending); edit (prefill, PUT body and `If-Match`, the loaded version kept, 409 with "Load the latest version") |
 
+### D15. Signing out of a protected page (found in the browser check)
+**The symptom:** signing out on `/local` landed on `/login?next=%2Flocal` instead of the home page. `add-auth-ui` had fixed this by navigating home before clearing the session, and its test passed. But that test clicks through React Testing Library's `act()`, which flushes React Router's transition to `/` before the session is cleared.
+
+**What a browser does:** it renders the urgent sign-out first, on the protected page that is still showing, and `ProtectedRoute` redirects to sign-in. `/local` is the app's first real protected page, so this is the first place a user could meet the bug.
+
+**The fix:** the navigation home is flushed synchronously (`flushSync`) before the session is cleared. The tests now render with the DOM `RouterProvider`, as the app does, so that option works in them too. A new test clicks "Sign out" on `/local` with React's act environment off, as a browser schedules updates; it failed 3 of 3 times before the fix.
+
 ## Risks / Trade-offs
 
 - [A background refetch while editing] → the form keeps its loaded version (D3), so a conflict is reported rather than overwritten.
