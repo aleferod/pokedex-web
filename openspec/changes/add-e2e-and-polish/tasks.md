@@ -12,7 +12,7 @@ The end-to-end journeys are the tests of this change: each is written and run re
 
 ## 3. Journeys
 
-- [ ] 3.1 Write `visitor.e2e.ts`, `account.e2e.ts` and `local.e2e.ts` (D3). Verify: run against the stack; any failure is investigated (app bug → fix test-first in the unit suite too; test bug → fix the test).
+- [x] 3.1 Write `visitor.e2e.ts`, `account.e2e.ts` and `local.e2e.ts` (D3). Verify: run against the stack; any failure is investigated (app bug → fix test-first in the unit suite too; test bug → fix the test).
 - [ ] 3.2 Write `a11y.e2e.ts` (D4). Verify: run; fix every serious or critical violation in the app, with a unit test where the fix is behavioural.
 
 ## 4. CI, screenshots and docs
