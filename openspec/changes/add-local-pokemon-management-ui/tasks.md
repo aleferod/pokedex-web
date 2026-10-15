@@ -55,7 +55,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 - [ ] 6.3 Update the README (My Pokédex, sync, concurrency, roles). Run `openspec validate add-local-pokemon-management-ui --strict` and gitleaks. Verify: valid, no leaks.
 
 - [x] 6.4 Found in 6.2: signing out of `/local` landed on sign-in (D15). Write a test that signs out of `/local` outside `act()`, as a browser schedules it. Verify: red (3 of 3 runs end at `/login`).
-- [ ] 6.5 Navigate home with `flushSync` before signing out, and render tests with the DOM `RouterProvider`. Verify: 6.4 green; all gates green; checked again in the browser.
+- [x] 6.5 Navigate home with `flushSync` before signing out, and render tests with the DOM `RouterProvider`. Verify: 6.4 green; all gates green; checked again in the browser.
 
 ## Workflow follow-up
 
