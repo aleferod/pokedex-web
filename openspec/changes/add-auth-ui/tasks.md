@@ -4,8 +4,8 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 1. Rules and storage
 
-- [ ] 1.1 Add `react-hook-form`, `@hookform/resolvers` and `zod`. Write `schemas.test.ts`, `session.test.ts` and `safeNext.test.ts` (D1, D3, D4). Verify: red against stubs.
-- [ ] 1.2 Implement `features/auth/schemas.ts`, `session.ts` and `safeNext.ts`. Verify: 1.1 green.
+- [x] 1.1 Add `react-hook-form`, `@hookform/resolvers` and `zod`. Write `schemas.test.ts`, `session.test.ts` and `safeNext.test.ts` (D1, D3, D4). Verify: red against stubs.
+- [x] 1.2 Implement `features/auth/schemas.ts`, `session.ts` and `safeNext.ts`. Verify: 1.1 green.
 
 ## 2. Session state and routing
 
