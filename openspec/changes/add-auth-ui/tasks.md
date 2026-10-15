@@ -26,8 +26,8 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 4. Verification
 
-- [ ] 4.1 Run every gate in Docker from a clean checkout. Verify: all pass; record coverage.
-- [ ] 4.2 Against the real pokedex-api (`docker compose up` there, with the demo data) and the dev server, in a real browser:
+- [x] 4.1 Run every gate in Docker from a clean checkout. Verify: all pass; record coverage.
+- [x] 4.2 Against the real pokedex-api (`docker compose up` there, with the demo data) and the dev server, in a real browser:
   - register a new user
   - sign out
   - sign in as `trainer`
@@ -36,7 +36,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
   - a wrong password
   - read the console
   - Verify: as in the spec; zero console warnings or errors.
-- [ ] 4.3 Update the README (auth flow, the session-storage choice). Run `openspec validate add-auth-ui --strict` and gitleaks. Verify: valid, no leaks; lychee shows no broken links.
+- [x] 4.3 Update the README (auth flow, the session-storage choice). Run `openspec validate add-auth-ui --strict` and gitleaks. Verify: valid, no leaks; lychee shows no broken links.
 
 ## Workflow follow-up
 
