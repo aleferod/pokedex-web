@@ -4,7 +4,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 1. Rules and URL
 
-- [ ] 1.1 Write the `parseName`, `catalogSearch` and `catalogReturn` tests with a name (D1, D5). Verify: red against stubs.
+- [x] 1.1 Write the `parseName`, `catalogSearch` and `catalogReturn` tests with a name (D1, D5). Verify: red against stubs.
 - [ ] 1.2 Implement them. Verify: 1.1 green; the existing catalog and detail tests stay green.
 
 ## 2. Search on the catalog

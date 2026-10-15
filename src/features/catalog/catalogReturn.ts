@@ -5,8 +5,8 @@ export interface CatalogReturnState {
   catalogSearch: string;
 }
 
-export function catalogReturnState(page: number, size: number): CatalogReturnState {
-  return { catalogSearch: catalogSearch(page, size) };
+export function catalogReturnState(page: number, size: number, name = ''): CatalogReturnState {
+  return { catalogSearch: catalogSearch(page, size, name) };
 }
 
 /**

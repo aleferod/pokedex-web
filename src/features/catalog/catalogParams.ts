@@ -16,14 +16,22 @@ export function parseSize(value: string | null): number {
   return (PAGE_SIZES as readonly number[]).includes(size) ? size : DEFAULT_SIZE;
 }
 
+/** The search from `?name`: stub. */
+export function parseName(value: string | null): string {
+  return value ?? '';
+}
+
 /** The query string for a page and size, leaving defaults out (`/pokemon` is page 1 of 20). */
-export function catalogSearch(page: number, size: number): string {
+export function catalogSearch(page: number, size: number, name = ''): string {
   const params = new URLSearchParams();
   if (page !== 1) {
     params.set('page', String(page));
   }
   if (size !== DEFAULT_SIZE) {
     params.set('size', String(size));
+  }
+  if (name !== '') {
+    params.set('q', name);
   }
   const search = params.toString();
   return search === '' ? '' : `?${search}`;
