@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom/vitest';
 import { cleanup } from '@testing-library/react';
-import { afterAll, afterEach, beforeAll, beforeEach, vi } from 'vitest';
+import { afterAll, afterEach, beforeAll, beforeEach } from 'vitest';
 
+import { installConsoleGuard, takeConsoleMessages } from './consoleGuard';
 import { server } from './server';
 
 // Unmocked requests are failures, not silent passes.
@@ -14,20 +15,13 @@ afterAll(() => {
 
 // Zero console warnings: any console.error or console.warn (React key and act() warnings,
 // failed prop types, library deprecations) fails the test that produced it.
-let consoleMessages: string[] = [];
 beforeEach(() => {
-  consoleMessages = [];
-  for (const level of ['error', 'warn'] as const) {
-    vi.spyOn(console, level).mockImplementation((...args: unknown[]) => {
-      consoleMessages.push(`console.${level}: ${args.map(String).join(' ')}`);
-    });
-  }
+  installConsoleGuard();
 });
 afterEach(() => {
   cleanup();
   server.resetHandlers();
-  const messages = consoleMessages;
-  consoleMessages = [];
+  const messages = takeConsoleMessages();
   if (messages.length > 0) {
     throw new Error(`Unexpected console output:\n${messages.join('\n')}`);
   }
