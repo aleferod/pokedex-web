@@ -4,8 +4,8 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 1. Rules and components
 
-- [ ] 1.1 Write `identifier.test.ts` and `Pagination.test.tsx` (D4, D6). Verify: red against stubs.
-- [ ] 1.2 Implement `features/catalog/identifier.ts`, `shared/ui/Pagination.tsx` and `shared/ui/QueryError.tsx`. Verify: 1.1 green.
+- [x] 1.1 Write `identifier.test.ts` and `Pagination.test.tsx` (D4, D6). Verify: red against stubs.
+- [x] 1.2 Implement `features/catalog/identifier.ts`, `shared/ui/Pagination.tsx` and `shared/ui/QueryError.tsx`. Verify: 1.1 green.
 
 ## 2. Catalog page
 
