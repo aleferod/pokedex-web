@@ -29,8 +29,8 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 3. Verification
 
-- [ ] 3.1 Run every gate in Docker from a clean checkout. Verify: all pass; record coverage.
-- [ ] 3.2 Against the real pokedex-api and the dev server, in a real browser, check:
+- [x] 3.1 Run every gate in Docker from a clean checkout. Verify: all pass; record coverage.
+- [x] 3.2 Against the real pokedex-api and the dev server, in a real browser, check:
   - Bulbasaur: stats and the chain to Venusaur
   - Pikachu by name: the chain from Pichu
   - Eevee's 8 branches
@@ -44,7 +44,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
   - type badge contrast
   - the console
   - Verify: as in the spec; no app console output.
-- [ ] 3.3 Update the README (detail page, way back). Run `openspec validate add-detail-ui --strict` and gitleaks. Verify: valid, no leaks.
+- [x] 3.3 Update the README (detail page, way back). Run `openspec validate add-detail-ui --strict` and gitleaks. Verify: valid, no leaks.
 
 ## Workflow follow-up
 
