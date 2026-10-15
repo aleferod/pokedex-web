@@ -19,7 +19,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 ## 4. Delivery and CI
 
 - [x] 4.1 Add the `Dockerfile`, `nginx/default.conf.template` (SPA fallback, `/api/` proxy via `API_UPSTREAM`, caching, security headers, `/healthz`), `.dockerignore` and `.env.example` (D6). Verify: build the image, run it, `curl` `/healthz`, a deep link, the headers and a proxied `/api/` call against a stub upstream.
-- [ ] 4.2 Add `.github/workflows/ci.yml` (D8) and the README (setup, env vars, scripts, structure, API communication, testing, Docker). Verify: workflow YAML parses; lychee shows no broken links.
+- [x] 4.2 Add `.github/workflows/ci.yml` (D8) and the README (setup, env vars, scripts, structure, API communication, testing, Docker). Verify: workflow YAML parses; lychee shows no broken links.
 
 ## 5. Verification
 
