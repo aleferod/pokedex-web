@@ -17,7 +17,7 @@ The end-to-end journeys are the tests of this change: each is written and run re
 
 ## 4. CI, screenshots and docs
 
-- [ ] 4.1 Add the "End-to-end" CI job (D5). Verify: the workflow parses; the job runs green on the PR.
+- [x] 4.1 Add the "End-to-end" CI job (D5). Verify: the workflow parses; the job runs green on the PR.
 - [ ] 4.2 Add `screenshots.e2e.ts` and generate `docs/screenshots/` (D6). Verify: the images show the real stack with demo data.
 - [ ] 4.3 Update the README: the full stack, end-to-end tests, screenshots, status and roadmap. Run `openspec validate add-e2e-and-polish --strict`, gitleaks and lychee. Verify: valid, no leaks, no broken links.
 
