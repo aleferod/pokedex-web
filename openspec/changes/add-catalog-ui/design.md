@@ -71,6 +71,15 @@ The API answers `GET /api/v1/pokemon?page=<0-based>&size=<1..100>` with `{conten
 | `CatalogPage.test.tsx` (MSW) | first page request and card contents; null sprite and category; Next/Previous update the URL and request; shared link; nonsense params; page size resets the page; focus moves to the heading; loading skeletons; past-the-end empty state; 503 and retry; generic error; prefetch of the next page; find by name, find by number, invalid identifier |
 | `Pagination.test.tsx` | disabled ends, labels, callbacks |
 
+### D8. MSW 2.15 instead of MSW 3 (found in CI)
+CI failed the 503 test once: the page showed "Cannot reach the server" instead of the 503 message. The same failure came back locally in 5 of 11 full runs limited to one CPU. Logging MSW's lifecycle events and the fetch error showed the cause:
+- The failed request never reached MSW: there was no `request:start` event for it.
+- Undici really connected to `localhost:3000` and got `ECONNREFUSED` (an `AggregateError`).
+
+MSW 3.0.3 with `@mswjs/interceptors` 0.45.8 intercepts Node's `fetch` at the socket level, and under load it sometimes misses a request that follows another one to the same origin. Such a request skips the handlers and the unhandled-request check entirely, which breaks the `web-quality` rule that an unmocked request is an error. A short reproduction outside the app did not trigger it, so there is no upstream report yet.
+
+MSW 2.15.0, the mature line, has the same `http`, `HttpResponse` and `delay` APIs. It replaces `fetch` and answers in memory, without sockets. With it: 10 of 10 one-CPU runs passed with coverage, and no test tried the real network. The only change is the option's v2 name, `onUnhandledRequest: 'error'`. Move back to MSW 3 once a release fixes this.
+
 ## Risks / Trade-offs
 
 - [The first visit to a page is slow (the API fans out to PokeAPI)] → skeletons on first load, the previous page kept on later loads, and the next page prefetched. The backend cache makes repeat visits instant.
