@@ -22,7 +22,7 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
   - 503 with "Try again"
   - the way back from catalog page 3, through the chain, and when opened directly
   - Verify: red against stubs.
-- [ ] 2.2 Implement `api.ts`, `types.ts`, `usePokemonDetail`, `PokemonDetailPage`, `DetailSkeleton`, `StatsTable`, `TypeBadges`, `EvolutionTree` and `DetailNotFound`. Add the route, the catalog exports and the cards' link state. Verify: 2.1 green; lint, type-check and coverage gate green.
+- [x] 2.2 Implement `api.ts`, `types.ts`, `usePokemonDetail`, `PokemonDetailPage`, `DetailSkeleton`, `StatsTable`, `TypeBadges`, `EvolutionTree` and `DetailNotFound`. Add the route, the catalog exports and the cards' link state. Verify: 2.1 green; lint, type-check and coverage gate green.
 
 ## 3. Verification
 

@@ -2,15 +2,26 @@ import { Link } from 'react-router';
 
 import { formatKilograms } from '@/shared/format';
 
+import type { CatalogReturnState } from './catalogReturn';
 import { displayName } from './displayName';
 import type { CatalogEntry } from './types';
 
-/** One catalog entry; the whole card links to the Pokémon's page. */
-export function PokemonCard({ entry }: { entry: CatalogEntry }) {
+/**
+ * One catalog entry; the whole card links to the Pokémon's page, carrying the catalog place so the
+ * detail page can lead back to it.
+ */
+export function PokemonCard({
+  entry,
+  linkState,
+}: {
+  entry: CatalogEntry;
+  linkState: CatalogReturnState;
+}) {
   const name = displayName(entry.name);
   return (
     <Link
       to={`/pokemon/${String(entry.id)}`}
+      state={linkState}
       className="block h-full rounded-lg border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md"
     >
       <article className="flex h-full flex-col gap-1">
