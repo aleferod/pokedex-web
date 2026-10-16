@@ -14,8 +14,8 @@ TDD convention: each `test:` commit is red on assertions against stubs, and the 
 
 ## 3. Verification
 
-- [ ] 3.1 Add the search journey to `e2e/visitor.e2e.ts` and run the whole end-to-end suite with pokedex-api built from a checkout that has `add-catalog-name-search` (`API_CONTEXT`). Check it in a real browser: typing "pika" and pausing; a 2-character pause; "025" and Enter; Back; "Clear search"; a shared link; the keyboard; 360 px; the console. Verify: as specified; no app console output.
-- [ ] 3.2 Update the README (Catalog). Run `openspec validate add-catalog-search-ui --strict` and gitleaks. Verify: valid, no leaks.
+- [x] 3.1 Add the search journey to `e2e/visitor.e2e.ts` and run the whole end-to-end suite with pokedex-api built from a checkout that has `add-catalog-name-search` (`API_CONTEXT`). Check it in a real browser: typing "pika" and pausing; a 2-character pause; "025" and Enter; Back; "Clear search"; a shared link; the keyboard; 360 px; the console. Verify: as specified; no app console output.
+- [x] 3.2 Update the README (Catalog). Run `openspec validate add-catalog-search-ui --strict` and gitleaks. Verify: valid, no leaks.
 
 ## Workflow follow-up
 
