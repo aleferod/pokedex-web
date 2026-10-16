@@ -1,5 +1,7 @@
 # Pokédex Web
 
+> **This repository has moved.** The web app now lives in [aleferod/pokedex](https://github.com/aleferod/pokedex), as [`frontend/`](https://github.com/aleferod/pokedex/tree/main/frontend) next to the API, with this repository's history. This repository is archived and read-only. Its [pull requests](https://github.com/aleferod/pokedex-web/pulls?q=is%3Apr+is%3Amerged) still show each change's red/green commits.
+
 [![CI](https://github.com/aleferod/pokedex-web/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/aleferod/pokedex-web/actions/workflows/ci.yml)
 ![React 19](https://img.shields.io/badge/React-19-61dafb)
 ![TypeScript strict](https://img.shields.io/badge/TypeScript-strict-3178c6)
